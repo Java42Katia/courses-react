@@ -7,7 +7,7 @@ import { Course } from "../models/Course";
 import { AUTH_TOKEN_ITEM } from "../config/auth-config";
 const bearer = 'Bearer '
 function getAuthHeader() {
- return {'Authorization' : bearer + localStorage.getItem(AUTH_TOKEN_ITEM)}
+ return {'Authorization' : ''}
 }
 export default class CoursesAxiosImpl implements CoursesInterfaces {
     constructor(private url:string) {}

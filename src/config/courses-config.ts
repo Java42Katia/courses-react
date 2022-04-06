@@ -1,4 +1,5 @@
 import College from "../services/College";
+import CoursesAxiosImpl from "../services/CoursesAxiosImpl";
 //import CoursesAxiosImpl from "../services/CoursesAxiosImpl";
 import CoursesFireImpl from "../services/CoursesFireImpl";
 
@@ -23,6 +24,8 @@ export const MIN_COST_INT = 100;
 export const MAX_COST_INT = 5000;
 export const MIN_HOURS_INT = 10;
 export const MAX_HOURS_INT = 100;
-export const college =
-  new College(new CoursesFireImpl('courses'));
+// export const college =
+//   new College(new CoursesFireImpl('courses'));
+export const college = 
+  new College(new CoursesAxiosImpl('http://localhost:8080/courses'));
 export const CODE_SET_TIMEOUT = 30000;
