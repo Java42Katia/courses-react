@@ -5,9 +5,9 @@ import {catchError, map} from 'rxjs/operators';
 import CoursesInterfaces from "./CoursesInterfaces";
 import { Course } from "../models/Course";
 import { AUTH_TOKEN_ITEM } from "../config/auth-config";
-const bearer = 'Bearer '
+
 function getAuthHeader() {
- return {'Authorization' : ''}
+ return {'Authorization' : localStorage.getItem(AUTH_TOKEN_ITEM)}
 }
 export default class CoursesAxiosImpl implements CoursesInterfaces {
     constructor(private url:string) {}
