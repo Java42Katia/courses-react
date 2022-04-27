@@ -46,6 +46,7 @@ export default class AuthServiceRest implements AuthService {
 
     }
     async logout(): Promise<boolean> {
+        console.log("logout")
         localStorage.removeItem(AUTH_TOKEN_ITEM);
         localStorage.removeItem(USER_DATA_ITEM);
         return true;

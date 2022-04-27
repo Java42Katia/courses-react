@@ -35,19 +35,24 @@ const App: React.FC = () => {
     spacing: 4
   })
   const courses: Course[] | null = usePollerRedux<Course[] | null>(college, college.getAllCourses,
-    coursesSet, coursesSelector)
+    coursesSet, coursesSelector);
+
 
   const userData = usePollerRedux<UserData>(authService,
     authService.getUserData, userSet, userSelector);
   const dispatch = useDispatch();
   const code = useSelector<ReducersType, boolean>(state => state.code);
   useEffect(() => {
+ 
     let timeoutId: any;
+    if (!courses && userData.username) {
+      dispatch(codeSet(false));
+    }
     if (!code) {
-      timeoutId = setTimeout(() => dispatch(codeSet(true)), CODE_SET_TIMEOUT);
+      timeoutId = setTimeout(() => {console.log('logout'); dispatch(codeSet(true)); authService.logout().then(() => console.log('logout'));  }, CODE_SET_TIMEOUT);
     }
     return () => clearTimeout(timeoutId);
-  }, [code, dispatch])
+  }, [code, dispatch, courses])
 
   function getItems(): ActionItem[] {
     if (userData) {
@@ -66,7 +71,7 @@ const App: React.FC = () => {
 
       {userData?.username ? <div><NavigatorResponsive items={getItems()}></NavigatorResponsive>
         <Redirect to={PATH_COURSES}></Redirect></div> : <Redirect to={PATH_LOGIN}></Redirect>}
-      {(!courses && userData.username) ? <div><Alert severity='error'>Server is not in service. Please wait ... </Alert>
+      {(!code) ? <div><Alert severity='error'>Server is not in service. Please wait ... </Alert>
         <LinearProgress color="secondary" /></div> : <Switch>
         <Route path={PATH_COURSES} exact render={() =>
           <Courses />} />

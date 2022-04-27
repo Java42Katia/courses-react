@@ -163,7 +163,7 @@ const Courses: React.FC = () => {
             {!code &&
                 <Alert severity={'warning'}>{`administrator ${userData.displayName} does not have permission for deleting/update `}</Alert>}
             <DataGrid checkboxSelection columns={fields}
-                rows={courses} pageSize={10} onSelectionModelChange={selectionHandler}
+                rows={courses ? courses : []} pageSize={10} onSelectionModelChange={selectionHandler}
                 onEditRowModelChange={onEdit} />
         </div>
 
