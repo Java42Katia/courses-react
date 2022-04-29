@@ -28,4 +28,4 @@ export const MAX_HOURS_INT = 100;
 //   new College(new CoursesFireImpl('courses'));
 export const college = 
   new College(new CoursesAxiosImpl('http://localhost:8080/courses'));
-export const CODE_SET_TIMEOUT = 30000;
+export const CODE_SET_TIMEOUT = 300;
