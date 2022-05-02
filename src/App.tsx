@@ -49,7 +49,12 @@ const App: React.FC = () => {
       dispatch(codeSet(false));
     }
     if (!code) {
-      timeoutId = setTimeout(() => {console.log('logout'); dispatch(codeSet(true)); authService.logout().then(() => console.log('logout'));  }, CODE_SET_TIMEOUT);
+      timeoutId = setTimeout(() => {
+        console.log('logout');
+        dispatch(codeSet(true));
+        //authService.logout().then(() => console.log('logout'));
+      },
+      CODE_SET_TIMEOUT);
     }
     return () => clearTimeout(timeoutId);
   }, [code, dispatch, courses])
@@ -72,7 +77,10 @@ const App: React.FC = () => {
       {userData?.username ? <div><NavigatorResponsive items={getItems()}></NavigatorResponsive>
         <Redirect to={PATH_COURSES}></Redirect></div> : <Redirect to={PATH_LOGIN}></Redirect>}
       {(!code) ? <div><Alert severity='error'>Server is not in service. Please wait ... </Alert>
-        <LinearProgress color="secondary" /></div> : <Switch>
+        <LinearProgress color="secondary" />
+        <Route path={PATH_LOGOUT} exact render={() =>
+          <Logout />} />
+        </div> : <Switch>
         <Route path={PATH_COURSES} exact render={() =>
           <Courses />} />
         <Route path={PATH_ADD_COURSE} exact render={() =>
